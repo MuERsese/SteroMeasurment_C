@@ -1,0 +1,3 @@
+/home/bob/Desktop/program/SteroMeasurment_C/build/CMakeFiles/Measurement.dir
+/home/bob/Desktop/program/SteroMeasurment_C/build/CMakeFiles/edit_cache.dir
+/home/bob/Desktop/program/SteroMeasurment_C/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.5)
+project( stero_measurment )
+list (APPEND CMAKE_PREFIX_PATH "/home/bob/build/")
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( Measurement Measurement.cpp )
+target_link_libraries( Measurement ${OpenCV_LIBS} )
