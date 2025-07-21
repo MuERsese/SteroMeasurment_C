@@ -3,6 +3,8 @@
 #include <iostream>  
 #include <math.h> 
 #include <opencv2/imgproc.hpp>
+#include <vector>
+#include <cmath>
 using namespace std;
 using namespace cv;
 
@@ -69,29 +71,31 @@ Mat rec = (Mat_<double>(3, 3) << 1.0000, 0.0000, -0.0063,
 Mat R;//R 旋转矩阵
 void enhanceUnderwater(Mat& src, Mat& dst);
 
-      /*****立体匹配*****/
-void stereo_match(int, void*)
-{
-    bm->setBlockSize(2 * blockSize + 5);     //SAD窗口大小，5~21之间为宜
-    bm->setROI1(validROIL);
-    bm->setROI2(validROIR);
-    bm->setPreFilterSize(5);
-    bm->setPreFilterCap(61);
-    bm->setPreFilterType(StereoBM::PREFILTER_NORMALIZED_RESPONSE);
 
-    bm->setMinDisparity(0);  //最小视差，默认值为0, 可以是负值，int型
-    bm->setNumDisparities(numDisparities * 16 + 16);//视差窗口，即最大视差值与最小视差值之差,窗口大小必须是16的整数倍，int型
-    bm->setTextureThreshold(1);
-    bm->setUniquenessRatio(uniquenessRatio);//uniquenessRatio主要可以防止误匹配
-    bm->setSpeckleWindowSize(100);
-    bm->setSpeckleRange(32);
-    bm->setDisp12MaxDiff(-1);
-    Mat disp, disp8;
-    bm->compute(rectifyImageL, rectifyImageR, disp);//输入图像必须为灰度图
-    disp.convertTo(disp8, CV_8U, 255 / ((numDisparities * 16 + 16)*16.));//计算出的视差是CV_16S格式
-    reprojectImageTo3D(disp, xyz, Q, true); //在实际求距离时，ReprojectTo3D出来的X / W, Y / W, Z / W都要乘以16(也就是W除以16)，才能得到正确的三维坐标信息。
-    xyz = xyz * 16;
-    imshow("disparity", disp8);
+/*****点对匹配*****/
+std::vector<Point> leftPoints, rightPoints;
+bool drawingLeftNow = true; // true: 下一个点在左图，false: 右图
+Point currentPoint;
+Mat leftDrawImg, rightDrawImg;
+Mat sparseDispShow;
+bool drawingMode = true;
+void printAllPoint3DLengths();
+void drawSparseDisparityMap();
+void onSparseDispClick(int event, int x, int y, int, void*);
+void printAllPoint3DWorldCoords();
+
+void onDrawPoint(int event, int x, int y, int flags, void*) {
+    if (!drawingMode) return;
+    if (event == EVENT_LBUTTONDOWN) {
+        currentPoint = Point(x, y);
+        if (drawingLeftNow) {
+            circle(leftDrawImg, currentPoint, 6, Scalar(0,255,0), FILLED);
+            imshow("Left Draw", leftDrawImg);
+        } else {
+            circle(rightDrawImg, currentPoint, 6, Scalar(0,255,0), FILLED);
+            imshow("Right Draw", rightDrawImg);
+        }
+    }
 }
 
 /*****描述：鼠标操作回调*****/
@@ -140,7 +144,7 @@ static void onMouse(int event, int x, int y, int, void*)
 int main()
 {
     /*
-    立体校正
+    calibration
     */
     Rodrigues(rec, R); //Rodrigues变换
     stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY,
@@ -149,17 +153,64 @@ int main()
     initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, imageSize, CV_32FC1, mapRx, mapRy);
 
     /*
-    读取图片
+    读取图片和预处理
     */
     stereoImage = imread("/home/bob/Desktop/program/SteroMeasurment_C/save2.png", cv::IMREAD_COLOR);
-    // Underwater enhancement
     Mat enhancedStereoImage;
     enhanceUnderwater(stereoImage, enhancedStereoImage);
-    cvtColor(enhancedStereoImage, graystereoImage, cv::COLOR_BGR2GRAY); 
-    grayImageL = graystereoImage(Rect(0, 0, imageWidth, imageHeight));
-    grayImageR = graystereoImage(Rect(imageWidth, 0, imageWidth, imageHeight));
-    
+    Mat leftImg = enhancedStereoImage(Rect(0, 0, imageWidth, imageHeight)).clone();
+    Mat rightImg = enhancedStereoImage(Rect(imageWidth, 0, imageWidth, imageHeight)).clone();
+    leftDrawImg = leftImg.clone();
+    rightDrawImg = rightImg.clone();
+    namedWindow("Left Draw", WINDOW_AUTOSIZE);
+    namedWindow("Right Draw", WINDOW_AUTOSIZE);
+    setMouseCallback("Left Draw", onDrawPoint, 0);
+    setMouseCallback("Right Draw", onDrawPoint, 0);
+    imshow("Left Draw", leftDrawImg);
+    imshow("Right Draw", rightDrawImg);
+    while (drawingMode) {
+        char key = (char)waitKey(1);
+        if (key == 'd' || key == 'D') {
+            // 保存当前点
+            if (drawingLeftNow) {
+                leftPoints.push_back(currentPoint);
+                cout << "已保存左图点: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
+                leftDrawImg = leftImg.clone();
+                // 画所有已保存点
+                for (const auto& pt : leftPoints) circle(leftDrawImg, pt, 6, Scalar(0,255,0), FILLED);
+                imshow("Left Draw", leftDrawImg);
+            } else {
+                rightPoints.push_back(currentPoint);
+                cout << "已保存右图点: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
+                rightDrawImg = rightImg.clone();
+                for (const auto& pt : rightPoints) circle(rightDrawImg, pt, 6, Scalar(0,255,0), FILLED);
+                imshow("Right Draw", rightDrawImg);
+            }
+            drawingLeftNow = !drawingLeftNow; // 交替
+        } else if (key == 's' || key == 'S') {
+            // 结束
+            if (!drawingLeftNow) {
+                cout << "请先在右图选点，保证点对完整。" << endl;
+                continue;
+            }
+            drawingMode = false;
+        }
+    }
+    destroyWindow("Left Draw");
+    destroyWindow("Right Draw");
 
+    // 检查点对数量
+    if (leftPoints.size() != rightPoints.size() || leftPoints.empty()) {
+        cout << "点对数量不一致或为空，无法继续。" << endl;
+        return 1;
+    }
+
+    // // 生成mask（可选：这里不再需要mask，保留空实现）
+    // leftMask = Mat::zeros(leftImg.size(), CV_8U);
+    // rightMask = Mat::zeros(rightImg.size(), CV_8U);
+    // 灰度图
+    cvtColor(leftImg, grayImageL, COLOR_BGR2GRAY);
+    cvtColor(rightImg, grayImageR, COLOR_BGR2GRAY);
     // imshow("ImageL Before Rectify", grayImageL);
     // imshow("ImageR Before Rectify", grayImageR);
 
@@ -171,13 +222,7 @@ int main()
     cvtColor(rectifyImageL, rgbRectifyImageL, cv::COLOR_GRAY2BGR);  //伪彩色图
     cvtColor(rectifyImageR, rgbRectifyImageR, cv::COLOR_GRAY2BGR);
 
-    //单独显示
-    //rectangle(rgbRectifyImageL, validROIL, Scalar(0, 0, 255), 3, 8);
-    //rectangle(rgbRectifyImageR, validROIR, Scalar(0, 0, 255), 3, 8);
-    // imshow("ImageL After Rectify", rgbRectifyImageL);
-    // imshow("ImageR After Rectify", rgbRectifyImageR);
-
-    //显示在同一张图上
+ 
     Mat canvas;
     double sf;
     int w, h;
@@ -207,20 +252,24 @@ int main()
         line(canvas, Point(0, i), Point(canvas.cols, i), Scalar(0, 255, 0), 1, 8);
     imshow("rectified", canvas);
 
-    /*
-    立体匹配
-    */
-    namedWindow("disparity", cv::WINDOW_AUTOSIZE);
-    // 创建SAD窗口 Trackbar
-    createTrackbar("BlockSize:\n", "disparity", &blockSize, 8, stereo_match);
-    // 创建视差唯一性百分比窗口 Trackbar
-    createTrackbar("UniquenessRatio:\n", "disparity", &uniquenessRatio, 50, stereo_match);
-    // 创建视差窗口 Trackbar
-    createTrackbar("NumDisparities:\n", "disparity", &numDisparities, 16, stereo_match);
-    //鼠标响应函数setMouseCallback(窗口名称, 鼠标回调函数, 传给回调函数的参数，一般取0)
-    setMouseCallback("disparity", onMouse, 0);
-    stereo_match(0, 0);
-
+  
+    drawSparseDisparityMap();
+    // 生成三维坐标图，确保xyz可用
+    {
+        // 需要和drawSparseDisparityMap()中sparseDisp一致
+        Mat sparseDisp = Mat::ones(imageHeight, imageWidth, CV_32F) * -16;
+        for (size_t i = 0; i < leftPoints.size() && i < rightPoints.size(); ++i) {
+            Point pL = leftPoints[i];
+            Point pR = rightPoints[i];
+            if (pL.y >= 0 && pL.y < imageHeight && pL.x >= 0 && pL.x < imageWidth &&
+                pR.y >= 0 && pR.y < imageHeight && pR.x >= 0 && pR.x < imageWidth) {
+                float disp = pL.x - pR.x;
+                sparseDisp.at<float>(pL.y, pL.x) = disp;
+            }
+        }
+        reprojectImageTo3D(sparseDisp, xyz, Q, true);
+    }
+    printAllPoint3DWorldCoords();
     waitKey(0);
     return 0;
 }
@@ -249,3 +298,90 @@ void enhanceUnderwater(Mat& src, Mat& dst) {
     bgr_planes[2] = bgr_planes[2] * (avg_gray / avg_r);
     merge(bgr_planes, dst);
 }
+
+// --- 稀疏disparity map（点对） ---
+void drawSparseDisparityMap() {
+    Mat sparseDisp = Mat::ones(imageHeight, imageWidth, CV_32F) * -16; // -16为无效
+    for (size_t i = 0; i < leftPoints.size() && i < rightPoints.size(); ++i) {
+        Point pL = leftPoints[i];
+        Point pR = rightPoints[i];
+        if (pL.y >= 0 && pL.y < imageHeight && pL.x >= 0 && pL.x < imageWidth &&
+            pR.y >= 0 && pR.y < imageHeight && pR.x >= 0 && pR.x < imageWidth) {
+            float disp = pL.x - pR.x;
+            sparseDisp.at<float>(pL.y, pL.x) = disp;
+        }
+    }
+    // 归一化到0-255
+    double minVal, maxVal;
+    minMaxLoc(sparseDisp, &minVal, &maxVal, 0, 0, sparseDisp > -16);
+    Mat disp8(imageHeight, imageWidth, CV_8U, Scalar(0));
+    for (int y = 0; y < imageHeight; ++y) {
+        for (int x = 0; x < imageWidth; ++x) {
+            float d = sparseDisp.at<float>(y, x);
+            if (d > -16) {
+                disp8.at<uchar>(y, x) = uchar(255.0 * (d - minVal) / (maxVal - minVal + 1e-5));
+            }
+        }
+    }
+    Mat colorDisp;
+    applyColorMap(disp8, colorDisp, COLORMAP_JET);
+    // mask外点设为红色
+    for (int y = 0; y < imageHeight; ++y) {
+        for (int x = 0; x < imageWidth; ++x) {
+            if (sparseDisp.at<float>(y, x) <= -16)
+                colorDisp.at<Vec3b>(y, x) = Vec3b(0,0,255);
+        }
+    }
+    namedWindow("sparse_disparity", WINDOW_NORMAL);
+    imshow("sparse_disparity", colorDisp);
+    sparseDispShow = colorDisp.clone(); // 保存一份用于点击测量
+    setMouseCallback("sparse_disparity", onSparseDispClick, 0);
+}
+
+// --- sparse_disparity窗口点击两点计算三维距离 ---
+Point clickedPts[2];
+int clickCount = 0;
+void onSparseDispClick(int event, int x, int y, int, void*) {
+    if (event == EVENT_LBUTTONDOWN) {
+        clickedPts[clickCount % 2] = Point(x, y);
+        clickCount++;
+        if (clickCount % 2 == 0) {
+            // 查找xyz三维坐标
+            Vec3f p3d1 = xyz.at<Vec3f>(clickedPts[0]);
+            Vec3f p3d2 = xyz.at<Vec3f>(clickedPts[1]);
+            double dist = norm(p3d1 - p3d2); // 单位：mm
+            cout << "3D distance: " << dist/10.0 << " cm (" << dist << " mm)" << endl;
+            // 在图像上画线和显示距离
+            Mat dispShow = sparseDispShow.clone();
+            line(dispShow, clickedPts[0], clickedPts[1], Scalar(0,255,255), 2);
+            char text[128];
+            sprintf(text, "%.2f cm", dist/10.0);
+            putText(dispShow, text, (clickedPts[0]+clickedPts[1])/2, FONT_HERSHEY_SIMPLEX, 0.8, Scalar(0,255,255), 2);
+            imshow("sparse_disparity", dispShow);
+        }
+    }
+}
+
+// --- 输出所有匹配点的真实世界坐标 ---
+void printAllPoint3DWorldCoords() {
+    cout << "\n===== 3D World Coordinates of All Matched Points =====" << endl;
+    for (size_t i = 0; i < leftPoints.size() && i < rightPoints.size(); ++i) {
+        Point pL = leftPoints[i];
+        Point pR = rightPoints[i];
+        if (pL.y >= 0 && pL.y < imageHeight && pL.x >= 0 && pL.x < imageWidth &&
+            pR.y >= 0 && pR.y < imageHeight && pR.x >= 0 && pR.x < imageWidth) {
+            Vec3f p3dL = xyz.at<Vec3f>(pL);
+            Vec3f p3dR = xyz.at<Vec3f>(pR);
+            Vec3f p3d;
+            if (pL.x == pR.x) {
+                p3d = p3dL;
+            } else {
+                p3d = (p3dL + p3dR) * 0.5f;
+            }
+            cout << "Point " << i+1 << " (Left: " << pL.x << "," << pL.y << ", Right: " << pR.x << "," << pR.y << ") 3D: (x=" << p3d[0] << ", y=" << p3d[1] << ", z=" << p3d[2] << ") mm" << endl;
+        }
+    }
+    cout << "==========================================\n" << endl;
+}
+
+
