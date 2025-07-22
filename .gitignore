@@ -1,0 +1,14 @@
+image.zip
+build
+image
+build/CMakeCache.txt
+build/Measurement
+build/CMakeFiles/Makefile.cmake
+build/CMakeFiles/Measurement.dir/build.make
+build/CMakeFiles/Measurement.dir/compiler_depend.internal
+build/CMakeFiles/Measurement.dir/compiler_depend.make
+build/CMakeFiles/Measurement.dir/flags.make
+build/CMakeFiles/Measurement.dir/link.txt
+build/CMakeFiles/Measurement.dir/Measurement.cpp.o
+build/CMakeFiles/Measurement.dir/Measurement.cpp.o.d
+build/cmake.sh

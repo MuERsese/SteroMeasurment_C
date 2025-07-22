@@ -145,7 +145,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=stero_measurment
+CMAKE_PROJECT_NAME:STATIC=MyProject
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -209,8 +209,185 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Value Computed by CMake
+MyProject_BINARY_DIR:STATIC=/home/bob/Desktop/program/SteroMeasurment_C/build
+
+//Value Computed by CMake
+MyProject_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+MyProject_SOURCE_DIR:STATIC=/home/bob/Desktop/program/SteroMeasurment_C
+
 //The directory containing a CMake configuration file for OpenCV.
 OpenCV_DIR:PATH=/home/bob/build
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
+
+//pkg-config executable
+PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_alphamat:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_alphamat.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_aruco:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_aruco.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_barcode:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_barcode.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_bgsegm:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_bioinspired:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_calib3d:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_calib3d.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_ccalib:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_ccalib.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_core:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_core.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_datasets:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_datasets.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_dnn:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_dnn.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_dnn_objdetect:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_dnn_objdetect.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_dnn_superres:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_dnn_superres.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_dpm:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_dpm.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_face:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_face.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_features2d:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_features2d.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_flann:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_flann.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_freetype:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_freetype.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_fuzzy:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_hdf:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_hdf.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_hfs:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_hfs.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_highgui:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_highgui.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_img_hash:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_img_hash.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_imgcodecs:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_imgproc:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_imgproc.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_intensity_transform:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_intensity_transform.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_line_descriptor:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_mcc:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_mcc.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_ml:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_ml.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_objdetect:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_objdetect.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_optflow:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_optflow.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_phase_unwrapping:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_photo:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_photo.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_plot:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_plot.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_quality:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_quality.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_rapid:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_rapid.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_reg:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_reg.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_rgbd:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_rgbd.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_saliency:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_saliency.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_shape:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_shape.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_stereo:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_stereo.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_stitching:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_stitching.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_structured_light:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_structured_light.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_superres:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_superres.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_surface_matching:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_text:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_text.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_tracking:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_tracking.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_video:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_video.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_videoio:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_videoio.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_videostab:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_videostab.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_viz:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_viz.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_wechat_qrcode:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_wechat_qrcode.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_ximgproc:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_xobjdetect:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so
+
+//Path to a library.
+pkgcfg_lib_OPENCV_opencv_xphoto:FILEPATH=/usr/lib/x86_64-linux-gnu/libopencv_xphoto.so
 
 //Value Computed by CMake
 stero_measurment_BINARY_DIR:STATIC=/home/bob/Desktop/program/SteroMeasurment_C/build
@@ -371,4 +548,156 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding OpenCV
 FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/home/bob/build][v4.13.0()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
+OPENCV_CFLAGS:INTERNAL=-I/usr/include/opencv4
+OPENCV_CFLAGS_I:INTERNAL=
+OPENCV_CFLAGS_OTHER:INTERNAL=
+OPENCV_FOUND:INTERNAL=1
+OPENCV_INCLUDEDIR:INTERNAL=/usr/include/opencv4
+OPENCV_INCLUDE_DIRS:INTERNAL=/usr/include/opencv4
+OPENCV_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lopencv_stitching;-lopencv_alphamat;-lopencv_aruco;-lopencv_barcode;-lopencv_bgsegm;-lopencv_bioinspired;-lopencv_ccalib;-lopencv_dnn_objdetect;-lopencv_dnn_superres;-lopencv_dpm;-lopencv_face;-lopencv_freetype;-lopencv_fuzzy;-lopencv_hdf;-lopencv_hfs;-lopencv_img_hash;-lopencv_intensity_transform;-lopencv_line_descriptor;-lopencv_mcc;-lopencv_quality;-lopencv_rapid;-lopencv_reg;-lopencv_rgbd;-lopencv_saliency;-lopencv_shape;-lopencv_stereo;-lopencv_structured_light;-lopencv_phase_unwrapping;-lopencv_superres;-lopencv_optflow;-lopencv_surface_matching;-lopencv_tracking;-lopencv_highgui;-lopencv_datasets;-lopencv_text;-lopencv_plot;-lopencv_ml;-lopencv_videostab;-lopencv_videoio;-lopencv_viz;-lopencv_wechat_qrcode;-lopencv_ximgproc;-lopencv_video;-lopencv_xobjdetect;-lopencv_objdetect;-lopencv_calib3d;-lopencv_imgcodecs;-lopencv_features2d;-lopencv_dnn;-lopencv_flann;-lopencv_xphoto;-lopencv_photo;-lopencv_imgproc;-lopencv_core
+OPENCV_LDFLAGS_OTHER:INTERNAL=
+OPENCV_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+OPENCV_LIBRARIES:INTERNAL=opencv_stitching;opencv_alphamat;opencv_aruco;opencv_barcode;opencv_bgsegm;opencv_bioinspired;opencv_ccalib;opencv_dnn_objdetect;opencv_dnn_superres;opencv_dpm;opencv_face;opencv_freetype;opencv_fuzzy;opencv_hdf;opencv_hfs;opencv_img_hash;opencv_intensity_transform;opencv_line_descriptor;opencv_mcc;opencv_quality;opencv_rapid;opencv_reg;opencv_rgbd;opencv_saliency;opencv_shape;opencv_stereo;opencv_structured_light;opencv_phase_unwrapping;opencv_superres;opencv_optflow;opencv_surface_matching;opencv_tracking;opencv_highgui;opencv_datasets;opencv_text;opencv_plot;opencv_ml;opencv_videostab;opencv_videoio;opencv_viz;opencv_wechat_qrcode;opencv_ximgproc;opencv_video;opencv_xobjdetect;opencv_objdetect;opencv_calib3d;opencv_imgcodecs;opencv_features2d;opencv_dnn;opencv_flann;opencv_xphoto;opencv_photo;opencv_imgproc;opencv_core
+OPENCV_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+OPENCV_LIBS:INTERNAL=
+OPENCV_LIBS_L:INTERNAL=
+OPENCV_LIBS_OTHER:INTERNAL=
+OPENCV_LIBS_PATHS:INTERNAL=
+OPENCV_MODULE_NAME:INTERNAL=opencv4
+OPENCV_PREFIX:INTERNAL=/usr
+OPENCV_STATIC_CFLAGS:INTERNAL=-I/usr/include/opencv4
+OPENCV_STATIC_CFLAGS_I:INTERNAL=
+OPENCV_STATIC_CFLAGS_OTHER:INTERNAL=
+OPENCV_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/opencv4
+OPENCV_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lopencv_stitching;-lopencv_alphamat;-lopencv_aruco;-lopencv_barcode;-lopencv_bgsegm;-lopencv_bioinspired;-lopencv_ccalib;-lopencv_dnn_objdetect;-lopencv_dnn_superres;-lopencv_dpm;-lopencv_face;-lopencv_freetype;-lopencv_fuzzy;-lopencv_hdf;-lopencv_hfs;-lopencv_img_hash;-lopencv_intensity_transform;-lopencv_line_descriptor;-lopencv_mcc;-lopencv_quality;-lopencv_rapid;-lopencv_reg;-lopencv_rgbd;-lopencv_saliency;-lopencv_shape;-lopencv_stereo;-lopencv_structured_light;-lopencv_phase_unwrapping;-lopencv_superres;-lopencv_optflow;-lopencv_surface_matching;-lopencv_tracking;-lopencv_highgui;-lopencv_datasets;-lopencv_text;-lopencv_plot;-lopencv_ml;-lopencv_videostab;-lopencv_videoio;-lopencv_viz;-lopencv_wechat_qrcode;-lopencv_ximgproc;-lopencv_video;-lopencv_xobjdetect;-lopencv_objdetect;-lopencv_calib3d;-lopencv_imgcodecs;-lopencv_features2d;-lopencv_dnn;-lopencv_flann;-lopencv_xphoto;-lopencv_photo;-lopencv_imgproc;-lopencv_core;-ldl;-lm;-lpthread;-lrt
+OPENCV_STATIC_LDFLAGS_OTHER:INTERNAL=
+OPENCV_STATIC_LIBDIR:INTERNAL=
+OPENCV_STATIC_LIBRARIES:INTERNAL=opencv_stitching;opencv_alphamat;opencv_aruco;opencv_barcode;opencv_bgsegm;opencv_bioinspired;opencv_ccalib;opencv_dnn_objdetect;opencv_dnn_superres;opencv_dpm;opencv_face;opencv_freetype;opencv_fuzzy;opencv_hdf;opencv_hfs;opencv_img_hash;opencv_intensity_transform;opencv_line_descriptor;opencv_mcc;opencv_quality;opencv_rapid;opencv_reg;opencv_rgbd;opencv_saliency;opencv_shape;opencv_stereo;opencv_structured_light;opencv_phase_unwrapping;opencv_superres;opencv_optflow;opencv_surface_matching;opencv_tracking;opencv_highgui;opencv_datasets;opencv_text;opencv_plot;opencv_ml;opencv_videostab;opencv_videoio;opencv_viz;opencv_wechat_qrcode;opencv_ximgproc;opencv_video;opencv_xobjdetect;opencv_objdetect;opencv_calib3d;opencv_imgcodecs;opencv_features2d;opencv_dnn;opencv_flann;opencv_xphoto;opencv_photo;opencv_imgproc;opencv_core;dl;m;pthread;rt
+OPENCV_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+OPENCV_STATIC_LIBS:INTERNAL=
+OPENCV_STATIC_LIBS_L:INTERNAL=
+OPENCV_STATIC_LIBS_OTHER:INTERNAL=
+OPENCV_STATIC_LIBS_PATHS:INTERNAL=
+OPENCV_VERSION:INTERNAL=4.5.4
+OPENCV_opencv4_INCLUDEDIR:INTERNAL=
+OPENCV_opencv4_LIBDIR:INTERNAL=
+OPENCV_opencv4_PREFIX:INTERNAL=
+OPENCV_opencv4_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
+PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+__pkg_config_arguments_OPENCV:INTERNAL=REQUIRED;opencv4
+__pkg_config_checked_OPENCV:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_alphamat
+pkgcfg_lib_OPENCV_opencv_alphamat-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_aruco
+pkgcfg_lib_OPENCV_opencv_aruco-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_barcode
+pkgcfg_lib_OPENCV_opencv_barcode-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_bgsegm
+pkgcfg_lib_OPENCV_opencv_bgsegm-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_bioinspired
+pkgcfg_lib_OPENCV_opencv_bioinspired-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_calib3d
+pkgcfg_lib_OPENCV_opencv_calib3d-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_ccalib
+pkgcfg_lib_OPENCV_opencv_ccalib-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_core
+pkgcfg_lib_OPENCV_opencv_core-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_datasets
+pkgcfg_lib_OPENCV_opencv_datasets-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_dnn
+pkgcfg_lib_OPENCV_opencv_dnn-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_dnn_objdetect
+pkgcfg_lib_OPENCV_opencv_dnn_objdetect-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_dnn_superres
+pkgcfg_lib_OPENCV_opencv_dnn_superres-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_dpm
+pkgcfg_lib_OPENCV_opencv_dpm-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_face
+pkgcfg_lib_OPENCV_opencv_face-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_features2d
+pkgcfg_lib_OPENCV_opencv_features2d-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_flann
+pkgcfg_lib_OPENCV_opencv_flann-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_freetype
+pkgcfg_lib_OPENCV_opencv_freetype-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_fuzzy
+pkgcfg_lib_OPENCV_opencv_fuzzy-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_hdf
+pkgcfg_lib_OPENCV_opencv_hdf-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_hfs
+pkgcfg_lib_OPENCV_opencv_hfs-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_highgui
+pkgcfg_lib_OPENCV_opencv_highgui-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_img_hash
+pkgcfg_lib_OPENCV_opencv_img_hash-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_imgcodecs
+pkgcfg_lib_OPENCV_opencv_imgcodecs-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_imgproc
+pkgcfg_lib_OPENCV_opencv_imgproc-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_intensity_transform
+pkgcfg_lib_OPENCV_opencv_intensity_transform-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_line_descriptor
+pkgcfg_lib_OPENCV_opencv_line_descriptor-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_mcc
+pkgcfg_lib_OPENCV_opencv_mcc-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_ml
+pkgcfg_lib_OPENCV_opencv_ml-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_objdetect
+pkgcfg_lib_OPENCV_opencv_objdetect-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_optflow
+pkgcfg_lib_OPENCV_opencv_optflow-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_phase_unwrapping
+pkgcfg_lib_OPENCV_opencv_phase_unwrapping-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_photo
+pkgcfg_lib_OPENCV_opencv_photo-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_plot
+pkgcfg_lib_OPENCV_opencv_plot-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_quality
+pkgcfg_lib_OPENCV_opencv_quality-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_rapid
+pkgcfg_lib_OPENCV_opencv_rapid-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_reg
+pkgcfg_lib_OPENCV_opencv_reg-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_rgbd
+pkgcfg_lib_OPENCV_opencv_rgbd-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_saliency
+pkgcfg_lib_OPENCV_opencv_saliency-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_shape
+pkgcfg_lib_OPENCV_opencv_shape-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_stereo
+pkgcfg_lib_OPENCV_opencv_stereo-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_stitching
+pkgcfg_lib_OPENCV_opencv_stitching-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_structured_light
+pkgcfg_lib_OPENCV_opencv_structured_light-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_superres
+pkgcfg_lib_OPENCV_opencv_superres-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_surface_matching
+pkgcfg_lib_OPENCV_opencv_surface_matching-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_text
+pkgcfg_lib_OPENCV_opencv_text-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_tracking
+pkgcfg_lib_OPENCV_opencv_tracking-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_video
+pkgcfg_lib_OPENCV_opencv_video-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_videoio
+pkgcfg_lib_OPENCV_opencv_videoio-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_videostab
+pkgcfg_lib_OPENCV_opencv_videostab-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_viz
+pkgcfg_lib_OPENCV_opencv_viz-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_wechat_qrcode
+pkgcfg_lib_OPENCV_opencv_wechat_qrcode-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_ximgproc
+pkgcfg_lib_OPENCV_opencv_ximgproc-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_xobjdetect
+pkgcfg_lib_OPENCV_opencv_xobjdetect-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_OPENCV_opencv_xphoto
+pkgcfg_lib_OPENCV_opencv_xphoto-ADVANCED:INTERNAL=1
+prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 
