@@ -1,4 +1,4 @@
-/*        双目测距        */
+/*        stereo distance measurement        */
 #include <opencv2/opencv.hpp>  
 #include <iostream>  
 #include <math.h> 
@@ -71,13 +71,13 @@ Mat rec = (Mat_<double>(3, 3) << 1.0000, 0.0000, -0.0063,
     0.0063, -0.0016, 1.0000);               
 
 
-Mat R;//R 旋转矩阵
+Mat R;//R rotation matrix
 
 
 
-/*****点对匹配*****/
+/*****point pair matching*****/
 std::vector<Point> leftPoints, rightPoints;
-bool drawingLeftNow = true; // true: 下一个点在左图，false: 右图
+bool drawingLeftNow = true; // true: next point in left image, false: right image
 Point currentPoint;
 Mat leftDrawImg, rightDrawImg;
 Mat sparseDispShow;
@@ -147,14 +147,16 @@ void printPoint3DWorldCoordAndDistance(int idx, Point pL, Point pR, const std::v
 int main()
 {
     /* calibration */
-    Rodrigues(rec, R); //Rodrigues变换
+    Rodrigues(rec, R); //Rodrigues transform
     stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY,
-        0, imageSize, &validROIL, &validROIR);
+        0, imageSize);
+    // stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl, Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY,
+    //     0, imageSize, &validROIL, &validROIR);
     initUndistortRectifyMap(cameraMatrixL, distCoeffL, Rl, Pl, imageSize, CV_32FC1, mapLx, mapLy);
     initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, imageSize, CV_32FC1, mapRx, mapRy);
 
-    /* 读取图片和预处理 */
-    stereoImage = imread("/home/bob/Desktop/program/SteroMeasurment_C/image/image0.png", cv::IMREAD_COLOR);
+    /* imread and pre-processing */
+    stereoImage = imread("/home/bob/Desktop/program/SteroMeasurment_C/image/image3.png", cv::IMREAD_COLOR);
     if (stereoImage.empty()) {
         cout << "Failed to load image!" << endl;
         return -1;
@@ -168,10 +170,10 @@ int main()
 
     remap(grayImageL, rectifyImageL, mapLx, mapLy, INTER_LINEAR);
     remap(grayImageR, rectifyImageR, mapRx, mapRy, INTER_LINEAR);
-
+    
     Mat rgbRectifyImageL, rgbRectifyImageR;
 
-    cvtColor(rectifyImageL, rgbRectifyImageL, COLOR_GRAY2BGR);  //伪彩色图
+    cvtColor(rectifyImageL, rgbRectifyImageL, COLOR_GRAY2BGR);  //pseudo-color image
     cvtColor(rectifyImageR, rgbRectifyImageR, COLOR_GRAY2BGR);
 
 
@@ -193,17 +195,18 @@ int main()
     // Get baseline and focal length from calibration
     double baseline_mm = abs(T.at<double>(0,0)); // baseline in mm
     double focal_px = cameraMatrixL.at<double>(0,0); // fx in pixels
+    double focal_py = cameraMatrixL.at<double>(1,1); // fy in pixels
     while (drawingMode) {
         char key = (char)waitKey(1);
         if (key == 'd' || key == 'D') {
             if (drawingLeftNow) {
                 leftPoints.push_back(currentPoint);
-                cout << "已保存左图点: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
+                cout << "left image point saved: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
                 for (const auto& pt : leftPoints) circle(leftDrawImg, pt, 6, Scalar(0,255,0), FILLED);
                 imshow("Left Draw", leftDrawImg);
             } else {
                 rightPoints.push_back(currentPoint);
-                cout << "已保存右图点: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
+                cout << "right image point saved: (" << currentPoint.x << "," << currentPoint.y << ")" << endl;
                 for (const auto& pt : rightPoints) circle(rightDrawImg, pt, 6, Scalar(0,255,0), FILLED);
                 imshow("Right Draw", rightDrawImg);
                 if (leftPoints.size() == rightPoints.size()) {
@@ -211,11 +214,12 @@ int main()
                     Point pR = rightPoints.back();
                     printPoint3DWorldCoordAndDistanceManual(pointPairIdx, pL, pR, worldCoords, baseline_mm, focal_px);
                     // Save for next distance calculation
+                    pL.y = (pL.y + pR.y) / 2.0;
                     double d = pL.x - pR.x;
                     if (d != 0) {
                         double z = baseline_mm * focal_px / d;
                         double x = z * pL.x / focal_px;
-                        double y = z * pL.y / focal_px;
+                        double y = z * pL.y / focal_py;
                         worldCoords.push_back(cv::Vec3f(x, y, z));
                         pointPairIdx++;
                     }
@@ -224,7 +228,7 @@ int main()
             drawingLeftNow = !drawingLeftNow;
         } else if (key == 's' || key == 'S') {
             if (!drawingLeftNow) {
-                cout << "请先在右图选点，保证点对完整。" << endl;
+                cout << "please select points on the right image" << endl;
                 continue;
             }
             drawingMode = false;
@@ -234,14 +238,18 @@ int main()
     destroyWindow("Right Draw");
 
     if (leftPoints.size() != rightPoints.size() || leftPoints.empty()) {
-        cout << "点对数量不一致或为空，无法继续。" << endl;
+        cout << "The number of point pairs is inconsistent or empty, unable to continue." << endl;
         return 1;
     }
     
     
-    Gen3DModel(); 
+    
+    int key = waitKey(1);
+    if (key == 'G' || key == 'g') {
+        Gen3DModel();
+    }
 
-    waitKey(0);
+    
     return 0;
 }
 
@@ -261,7 +269,7 @@ int Gen3DModel() {
     cin >> length >> width >> height;
     viz::Viz3d window("3D Model");
     viz::WCube cube(cv::Vec3d(0, 0, 0), cv::Vec3d(length, width, height), true, cv::viz::Color::blue());
-    window.showWidget("长方体", cube);
+    window.showWidget("Cube", cube);
     Affine3d pose = cv::Affine3d().rotate(cv::Vec3d(0, 0, CV_PI / 4));
     window.setViewerPose(pose);
     window.spin();
